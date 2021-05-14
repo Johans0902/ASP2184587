@@ -13,10 +13,10 @@ namespace _2184587.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class inventarioEntities : DbContext
+    public partial class inventarioEntities1 : DbContext
     {
-        public inventarioEntities()
-            : base("name=inventarioEntities")
+        public inventarioEntities1()
+            : base("name=inventarioEntities1")
         {
         }
     
