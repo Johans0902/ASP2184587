@@ -28,5 +28,6 @@ namespace _2184587.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<producto> producto { get; set; }
+        public string password { get; internal set; }
     }
 }

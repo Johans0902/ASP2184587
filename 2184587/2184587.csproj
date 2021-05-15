@@ -178,6 +178,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -278,6 +279,10 @@
     <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Cliente\Details.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
+    <Content Include="Views\Proveedor\index.cshtml" />
+    <Content Include="Views\Proveedor\Create.cshtml" />
+    <Content Include="Views\Proveedor\Edit.cshtml" />
+    <Content Include="Views\Proveedor\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
