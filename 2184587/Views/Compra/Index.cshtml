@@ -1,0 +1,64 @@
+﻿@model IEnumerable<_2184587.Models.compra>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista De Compras</h2>
+
+<p>
+    @Html.ActionLink("Crear Compra", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Fecha
+        </th>
+        <th>
+            Total
+        </th>
+        <th>
+            ID Usuario
+        </th>
+        <th>
+            ID Cliente
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_cliente)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new { @class = "linkDelete" }))
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@section scripts
+    {
+    <script>
+        $(".linkDelete").click(function (event) {
+            if (!confirm('¿Esta seguro de eliminar?')) {
+                event.preventDefault();
+            }
+        })
+    </script>
+}

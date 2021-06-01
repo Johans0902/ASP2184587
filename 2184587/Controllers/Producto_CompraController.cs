@@ -1,23 +1,35 @@
 ﻿using _2184587.Models;
 using System;
 using System.Linq;
-using System.Text;
 using System.Web.Mvc;
-
 
 namespace _2184587.Controllers
 {
-    public class UsuarioController : Controller
+    public class Producto_CompraController : Controller
     {
-        // GET: Usuario
+        // GET: Producto_Compra
         public ActionResult Index()
         {
             using (var db = new inventarioEntities1())
             {
-                return View(db.usuario.ToList());
+                return View(db.producto_compra.ToList());
             }
         }
 
+        public ActionResult ListarCompra()
+        {
+            using (var db = new inventarioEntities1())
+            {
+                return PartialView(db.compra.ToList());
+            }
+        }
+        public ActionResult ListarProducto()
+        {
+            using (var db = new inventarioEntities1())
+            {
+                return PartialView(db.producto.ToList());
+            }
+        }
 
         public ActionResult Create()
         {
@@ -27,7 +39,7 @@ namespace _2184587.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create(usuario usuario)
+        public ActionResult Create(producto_compra producto_compra)
         {
             if (!ModelState.IsValid)
                 return View();
@@ -37,9 +49,8 @@ namespace _2184587.Controllers
 
                 using (var db = new inventarioEntities1())
                 {
-                    usuario.password = UsuarioController.HashSHA1(usuario.password);
-                    db.usuario.Add(usuario);
-                    _ = db.SaveChanges();
+                    db.producto_compra.Add(producto_compra);
+                   _ = db.SaveChanges();
                     return RedirectToAction("index");
                 }
             }
@@ -48,31 +59,16 @@ namespace _2184587.Controllers
 
                 ModelState.AddModelError("", "error " + ex);
                 return View();
+
             }
-        }
-
-
-        public static string HashSHA1(string value)
-        {
-            var sha1 = System.Security.Cryptography.SHA1.Create();
-            var inputBytes = Encoding.ASCII.GetBytes(value);
-            var hash = sha1.ComputeHash(inputBytes);
-
-            var sb = new StringBuilder();
-            for (var i = 0; i < hash.Length; i++)
-            {
-
-                sb.Append(hash[i].ToString("X2"));
-            }
-            return sb.ToString();
         }
 
         public ActionResult Details(int id)
         {
             using (var db = new inventarioEntities1())
             {
-                var findUser = db.usuario.Find(id);
-                return View(findUser);
+                var producto_compra = db.producto_compra.Find(id);
+                return View(producto_compra);
             }
         }
 
@@ -83,8 +79,10 @@ namespace _2184587.Controllers
             {
                 using (var db = new inventarioEntities1())
                 {
-                    usuario findUser = db.usuario.Where(a => a.id == id).FirstOrDefault();
-                    return View(findUser);
+                    producto producto_compraEdit = db.producto.Where(a => a.id == id).FirstOrDefault();
+                    return View(producto_compraEdit);
+
+
                 }
             }
             catch (Exception ex)
@@ -95,21 +93,21 @@ namespace _2184587.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(usuario editUser)
+        public ActionResult Edit(producto_compra producto_compraEdit)
         {
             try
             {
                 using (var db = new inventarioEntities1())
                 {
-                    usuario user = db.usuario.Find(editUser.id);
-
-                    user.nombre = editUser.nombre;
-                    user.apellido = editUser.apellido;
-                    user.email = editUser.email;
-                    user.fecha_nacimiento = editUser.fecha_nacimiento;
-                    user.password = editUser.password;
-
+                    producto_compra oldproduct = db.producto_compra.Find(producto_compraEdit.id);
                     db.SaveChanges();
+
+                    oldproduct.id_compra = producto_compraEdit.id_compra;
+                    oldproduct.id_producto = producto_compraEdit.id_producto;
+                    oldproduct.cantidad = producto_compraEdit.cantidad;
+
+
+
                     return RedirectToAction("index");
                 }
             }
@@ -127,8 +125,8 @@ namespace _2184587.Controllers
             {
                 using (var db = new inventarioEntities1())
                 {
-                    var findUser = db.usuario.Find(id);
-                    db.usuario.Remove(findUser);
+                    var producto_compra = db.producto_compra.Find(id);
+                    db.producto_compra.Remove(producto_compra);
                     db.SaveChanges();
                     return RedirectToAction("index");
                 }
@@ -145,9 +143,3 @@ namespace _2184587.Controllers
 
     }
 }
-
-
-
-
-
-

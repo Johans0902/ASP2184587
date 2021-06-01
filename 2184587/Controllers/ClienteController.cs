@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using _2184587.Models;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using _2184587.Models;
 
 namespace _2184587.Controllers
 {

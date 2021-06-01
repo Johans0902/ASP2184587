@@ -1,24 +1,36 @@
 ﻿using _2184587.Models;
 using System;
 using System.Linq;
-using System.Text;
 using System.Web.Mvc;
-
 
 namespace _2184587.Controllers
 {
-    public class UsuarioController : Controller
+    public class ProductoController : Controller
     {
-        // GET: Usuario
+        // GET: Producto
         public ActionResult Index()
         {
             using (var db = new inventarioEntities1())
             {
-                return View(db.usuario.ToList());
+                return View(db.producto.ToList());
             }
         }
 
+        public static string NombreProveedor(int? idProveedor)
+        {
+            using (var db = new inventarioEntities1())
+            {
+                return db.proveedor.Find(idProveedor).nombre;
+            }
+        }
 
+        public ActionResult ListarProveedores()
+        {
+            using (var db = new inventarioEntities1())
+            {
+                return PartialView(db.proveedor.ToList());
+            }
+        }
         public ActionResult Create()
         {
             return View();
@@ -27,7 +39,7 @@ namespace _2184587.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create(usuario usuario)
+        public ActionResult Create(producto producto)
         {
             if (!ModelState.IsValid)
                 return View();
@@ -37,9 +49,8 @@ namespace _2184587.Controllers
 
                 using (var db = new inventarioEntities1())
                 {
-                    usuario.password = UsuarioController.HashSHA1(usuario.password);
-                    db.usuario.Add(usuario);
-                    _ = db.SaveChanges();
+                    db.producto.Add(producto);
+                    db.SaveChanges();
                     return RedirectToAction("index");
                 }
             }
@@ -51,28 +62,12 @@ namespace _2184587.Controllers
             }
         }
 
-
-        public static string HashSHA1(string value)
-        {
-            var sha1 = System.Security.Cryptography.SHA1.Create();
-            var inputBytes = Encoding.ASCII.GetBytes(value);
-            var hash = sha1.ComputeHash(inputBytes);
-
-            var sb = new StringBuilder();
-            for (var i = 0; i < hash.Length; i++)
-            {
-
-                sb.Append(hash[i].ToString("X2"));
-            }
-            return sb.ToString();
-        }
-
         public ActionResult Details(int id)
         {
             using (var db = new inventarioEntities1())
             {
-                var findUser = db.usuario.Find(id);
-                return View(findUser);
+                var producto = db.producto.Find(id);
+                return View(producto);
             }
         }
 
@@ -83,8 +78,10 @@ namespace _2184587.Controllers
             {
                 using (var db = new inventarioEntities1())
                 {
-                    usuario findUser = db.usuario.Where(a => a.id == id).FirstOrDefault();
-                    return View(findUser);
+                    producto productoEdit = db.producto.Where(a => a.id == id).FirstOrDefault();
+                    return View(productoEdit);
+
+
                 }
             }
             catch (Exception ex)
@@ -95,19 +92,20 @@ namespace _2184587.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(usuario editUser)
+        public ActionResult Edit(producto productoEdit)
         {
             try
             {
                 using (var db = new inventarioEntities1())
                 {
-                    usuario user = db.usuario.Find(editUser.id);
+                    producto oldproduct = db.producto.Find(productoEdit.id);
 
-                    user.nombre = editUser.nombre;
-                    user.apellido = editUser.apellido;
-                    user.email = editUser.email;
-                    user.fecha_nacimiento = editUser.fecha_nacimiento;
-                    user.password = editUser.password;
+                    oldproduct.nombre = productoEdit.nombre;
+                    oldproduct.cantidad = productoEdit.cantidad;
+                    oldproduct.descripcion = productoEdit.descripcion;
+                    oldproduct.percio_unitario = productoEdit.percio_unitario;
+                    oldproduct.id_proveedor = productoEdit.id_proveedor;
+
 
                     db.SaveChanges();
                     return RedirectToAction("index");
@@ -127,8 +125,8 @@ namespace _2184587.Controllers
             {
                 using (var db = new inventarioEntities1())
                 {
-                    var findUser = db.usuario.Find(id);
-                    db.usuario.Remove(findUser);
+                    var producto = db.producto.Find(id);
+                    db.producto.Remove(producto);
                     db.SaveChanges();
                     return RedirectToAction("index");
                 }
@@ -145,9 +143,3 @@ namespace _2184587.Controllers
 
     }
 }
-
-
-
-
-
-
