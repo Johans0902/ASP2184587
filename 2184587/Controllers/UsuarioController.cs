@@ -11,6 +11,7 @@ namespace _2184587.Controllers
     public class UsuarioController : Controller
     {
         // GET: Usuario
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new inventarioEntities1())
@@ -167,6 +168,14 @@ namespace _2184587.Controllers
                     return Login("Verifique sus datos");
                 }
             }
+        }
+        
+        [Authorize]
+
+        public ActionResult CloseSession()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
