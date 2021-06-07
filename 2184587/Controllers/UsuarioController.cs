@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.Security;
 
 
 namespace _2184587.Controllers
@@ -142,7 +143,31 @@ namespace _2184587.Controllers
 
         }
 
-
+        public ActionResult Login(string message = "")
+        {
+            ViewBag.Message = message;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string user, string password)
+        {
+            string passEncrip = UsuarioController.HashSHA1(password);
+            using (var db = new inventarioEntities1())
+            {
+                var userLogin = db.usuario.FirstOrDefault(e => e.email == user && e.password == passEncrip);
+                if(userLogin != null)
+                {
+                    FormsAuthentication.SetAuthCookie(userLogin.email, true);
+                    Session["User"] = userLogin;
+                    return RedirectToAction("index");
+                }
+                else
+                {
+                    return Login("Verifique sus datos");
+                }
+            }
+        }
     }
 }
 
