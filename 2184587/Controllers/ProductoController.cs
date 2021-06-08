@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using Rotativa;
 
 namespace _2184587.Controllers
 {
@@ -156,6 +157,10 @@ namespace _2184587.Controllers
                             };
                 return View(query);
             }
+        }
+        public ActionResult ImprimirReporte()
+        {
+            return new ActionAsPdf("Reporte") { FileName = "Reporte.pdf" };
         }
     }
 }
