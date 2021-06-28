@@ -1,55 +1,74 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+
+    <title>@ViewBag.Title - ASP 2184587 ASP.NET</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+   <link rel="stylesheet" href="~/Content/Custom.css">
+
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Iniciar Sesion", "index", "Usuario")</li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                    <li>@Html.ActionLink("Usuario", "index", "Usuario")</li>
-                    <li>@Html.ActionLink("Cliente", "index", "Cliente")</li>
-                    <li>@Html.ActionLink("Proveedor", "index", "Proveedor")</li>
-                    <li>@Html.ActionLink("Producto", "index", "Producto")</li>
-                    <li>@Html.ActionLink("Compra", "index", "Compra")</li>
-                    <li>@Html.ActionLink("Producto Compra", "index", "Producto_Compra")</li>
-                    <li>@Html.ActionLink("Cerrar Sesion", "CloseSession", "Usuario")</li>
-                     
-                    }
-                </ul>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("ASP 2184587", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+
+                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Iniciar Sesion", "index", "Usuario")</li>
+                        <li>@Html.ActionLink("Crear Usuario", "Create", "Usuario")</li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Usuario", "index", "Usuario")</li>
+                            <li>@Html.ActionLink("Cliente", "index", "Cliente")</li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funcionalidades <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Proveedor", "index", "Proveedor")</li>
+                                    <li>@Html.ActionLink("Producto", "index", "Producto")</li>
+                                    <li>@Html.ActionLink("Compra", "index", "Compra")</li>
+                                    <li>@Html.ActionLink("Producto Compra", "index", "Producto_Compra")</li>
+
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Cerrar Sesion", "CloseSession", "Usuario")</li>
+
+                        }
+
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
-    </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <font color="white">
+                    <p>&copy; @DateTime.Now.Year - ASP-2184587</p>
+                    </font>
+            </footer>
+        </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

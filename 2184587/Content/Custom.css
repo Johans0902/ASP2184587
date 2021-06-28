@@ -1,0 +1,32 @@
+﻿.navbar {
+    background-color: #61f3f3;
+    font-family: 'Concert One', cursive;
+}
+
+.navbar-inverse .navbar-brand {
+
+    color: #000000;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #000000;
+}
+
+center {
+    margin: 30px 0;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.form-control {
+    margin: 0px 0;
+    border: 5px solid #61f3f3;
+}
+
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+    
+}
+
+
