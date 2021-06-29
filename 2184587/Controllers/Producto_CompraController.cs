@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using Rotativa;
 
 namespace _2184587.Controllers
 {
@@ -139,7 +140,26 @@ namespace _2184587.Controllers
             }
 
         }
+        public ActionResult Reporte2()
+        {
+            var db = new inventarioEntities1();
+            {
+                var query = from tabProducto_Compra in db.producto_compra
+                            join tabProducto in db.producto on tabProducto_Compra.id_producto equals tabProducto.id
+                            select new Reporte2
+                            {
+                                id_compra = tabProducto_Compra.id_compra,
+                                producto = tabProducto.nombre,
+                                Cantidad = tabProducto_Compra.cantidad
 
+                            };
+                return View(query);
+            }
+        }
+        public ActionResult ImprimirReporte()
+        {
+            return new ActionAsPdf("Reporte2") { FileName = "Reporte.pdf" };
+        }
 
     }
 }

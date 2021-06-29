@@ -11,7 +11,8 @@ namespace _2184587.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class proveedor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +22,18 @@ namespace _2184587.Models
         }
     
         public int id { get; set; }
+        
+        [Required(ErrorMessage = "No puede ir vacio")]
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "Debe ser el 2 y maximo 30 caracteres")]
         public string nombre { get; set; }
+        [Required]
         public string direccion { get; set; }
+        [Required]
         public string telefono { get; set; }
+        [Required]
         public string nombre_contacto { get; set; }
-    
+        [Required(ErrorMessage = "No puede ir vacio")]
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<producto> producto { get; set; }
         public string password { get; internal set; }

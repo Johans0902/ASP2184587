@@ -11,7 +11,8 @@ namespace _2184587.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class compra
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,13 +22,19 @@ namespace _2184587.Models
         }
     
         public int id { get; set; }
+        [Required(ErrorMessage = "No puede ir vacio")]
         public Nullable<System.DateTime> fecha { get; set; }
+        [Required]
         public Nullable<int> total { get; set; }
+        [Required]
         public Nullable<int> id_usuario { get; set; }
         public Nullable<int> id_cliente { get; set; }
-    
+     
+
         public virtual cliente cliente { get; set; }
+      
         public virtual usuario usuario { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<producto_compra> producto_compra { get; set; }
     }

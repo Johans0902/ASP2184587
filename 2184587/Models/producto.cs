@@ -11,7 +11,8 @@ namespace _2184587.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class producto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,14 +22,20 @@ namespace _2184587.Models
         }
     
         public int id { get; set; }
+        [Required(ErrorMessage = "No puede ir vacio")]
         public string nombre { get; set; }
         public Nullable<int> percio_unitario { get; set; }
+        [Required]
         public string descripcion { get; set; }
+        [Required]
         public Nullable<int> cantidad { get; set; }
+        [Required]
         public Nullable<int> id_proveedor { get; set; }
-    
+        
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<producto_compra> producto_compra { get; set; }
         public virtual proveedor proveedor { get; set; }
+        public int? id_producto { get; internal set; }
     }
 }

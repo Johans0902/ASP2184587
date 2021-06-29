@@ -31,7 +31,6 @@
                     <ul class="nav navbar-nav">
 
                         <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                         <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                         <li>@Html.ActionLink("Iniciar Sesion", "index", "Usuario")</li>
                         <li>@Html.ActionLink("Crear Usuario", "Create", "Usuario")</li>
@@ -49,7 +48,10 @@
 
                                 </ul>
                             </li>
+                            <li>@Html.ActionLink("Carga Masiva", "uploadCSV", "Proveedor")</li>
+                            <li>@Html.ActionLink("Reporte", "Reporte2", "Producto_Compra")</li>
                             <li>@Html.ActionLink("Cerrar Sesion", "CloseSession", "Usuario")</li>
+
 
                         }
 
